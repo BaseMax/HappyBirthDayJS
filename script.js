@@ -9,6 +9,7 @@ let happy = [];
 const COLORS = [];
 const NUMBER_HAPPY = 500;
 const PI_2 = 2 * Math.PI;
+const audio = new Audio('music.mp3');
 const context = canvas.getContext("2d");
 
 // Functions
@@ -102,4 +103,8 @@ window.addEventListener("load", () => {
 
 document.addEventListener("mousemove", (e) => {
     mouse = e.clientX / window.w;
+});
+
+document.addEventListener("click", () => {
+    audio.play();
 });
