@@ -6,7 +6,7 @@ let mouse = 0.5;
 let happy = [];
 
 // Const variables
-const NUMBER_HAPPY = 350;
+const NUMBER_HAPPY = 500;
 const COLORS = [
     [174, 61, 99],
     [219, 56, 83],
