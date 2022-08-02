@@ -6,18 +6,19 @@ let mouse = 0.5;
 let happy = [];
 
 // Const variables
+const COLORS = [];
 const NUMBER_HAPPY = 500;
-const COLORS = [
-    [174, 61, 99],
-    [219, 56, 83],
-    [248, 182, 70],
-    [85, 71, 106],
-    [244, 92, 68]
-];
 const PI_2 = 2 * Math.PI;
 const context = canvas.getContext("2d");
 
 // Functions
+const randomColor = () => {
+    let r = Math.floor(Math.random() * 256);
+    let g = Math.floor(Math.random() * 256);
+    let b = Math.floor(Math.random() * 256);
+    return [r, g, b];
+};
+
 const resizeWindow = () => {
     window.w = canvas.width = window.innerWidth;
     window.h = canvas.height = window.innerHeight;
@@ -92,6 +93,7 @@ class Particle {
 window.addEventListener("resize", resizeWindow, false);
 
 window.addEventListener("load", () => {
+    for (let i = 1; i <= 10; i++) COLORS.push(randomColor());
     for (let i = 1, j = 1; (1 <= NUMBER_HAPPY ? j <= NUMBER_HAPPY : j >= NUMBER_HAPPY); i = 1 <= NUMBER_HAPPY ? ++j : --j) happy.push(new Particle());
 
     resizeWindow();
