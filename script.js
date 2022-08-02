@@ -99,6 +99,8 @@ window.addEventListener("load", () => {
 
     resizeWindow();
     step();
+
+    audio.load();
 });
 
 document.addEventListener("mousemove", (e) => {
