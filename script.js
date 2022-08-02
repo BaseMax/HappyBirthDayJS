@@ -52,3 +52,52 @@ const step = () => {
     for (let j = 0; j < happy.length; j++) results.push(happy[j].draw());
     return results;
 };
+
+// Class
+class Particle {
+    constructor() {
+        this.rgb = `rgba(${COLORS[~~range(0, COLORS.length)].join(",")}`;
+        this.r = ~~range(2, 6);
+        this.r2 = 2 * this.r;
+        this.replace();
+    }
+
+    replace() {
+        this.opacity = 0;
+        this.dop = 0.03 * range(1, 4);
+        this.x = range(-this.r2, window.w - this.r2);
+        this.y = range(-20, window.h - this.r2);
+        this.xmax = window.w - this.r;
+        this.ymax = window.h - this.r;
+        this.vx = range(0, 2) + 8 * mouse - 5;
+        this.vy = 0.7 * this.r + range(-1, 1);
+    }
+
+    draw() {
+        var ref;
+        this.x += this.vx;
+        this.y += this.vy;
+        this.opacity += this.dop;
+        if (this.opacity > 1) {
+            this.opacity = 1;
+            this.dop *= -1;
+        }
+        if (this.opacity < 0 || this.y > this.ymax) this.replace();
+        if (!((0 < (ref = this.x) && ref < this.xmax))) this.x = (this.x + this.xmax) % this.xmax;
+        return drawCircle(~~this.x, ~~this.y, this.r, `${this.rgb},${this.opacity})`);
+    }
+};
+
+// Events
+window.addEventListener("resize", resizeWindow, false);
+
+window.addEventListener("load", () => {
+    for (let i = 1, j = 1; (1 <= NUMBER_HAPPY ? j <= NUMBER_HAPPY : j >= NUMBER_HAPPY); i = 1 <= NUMBER_HAPPY ? ++j : --j) happy.push(new Particle());
+
+    resizeWindow();
+    step();
+});
+
+document.addEventListener("mousemove", (e) => {
+    mouse = e.clientX / window.w;
+});
